@@ -1,0 +1,44 @@
+[0m13:38:12.162762 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025574AD2400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000255773767F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025577376760>]}
+
+
+============================== 13:38:12.162762 | 81da202d-0ca3-4cee-a6fc-4a83ece09ba6 ==============================
+[0m13:38:12.162762 [info ] [MainThread]: Running with dbt=1.8.7
+[0m13:38:12.162762 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'profiles_dir': 'C:\\Users\\DH661UW\\.dbt', 'log_path': 'logs', 'version_check': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt init', 'log_format': 'default', 'static_parser': 'True', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m13:38:25.368150 [debug] [MainThread]: Starter project path: C:\Users\DH661UW\AppData\Local\Programs\Python\Python39\lib\site-packages\dbt\include\starter_project
+[0m13:38:25.465416 [info ] [MainThread]: 
+Your new dbt project "covid" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m13:38:25.480974 [info ] [MainThread]: Setting up your profile.
+[0m13:40:20.016098 [info ] [MainThread]: Profile covid written to C:\Users\DH661UW\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m13:40:20.019866 [debug] [MainThread]: Command `dbt init` succeeded at 13:40:20.019866 after 128.01 seconds
+[0m13:40:20.021881 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000025574AD2400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002557542E1C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000255770CC2B0>]}
+[0m13:40:20.023166 [debug] [MainThread]: Flushing usage events
+[0m13:40:20.582594 [debug] [MainThread]: Error sending anonymous usage statistics. Disabling tracking for this execution. If you wish to permanently disable tracking, see: https://docs.getdbt.com/reference/global-configs#send-anonymous-usage-stats.
+[0m13:49:59.559739 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002511F972400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002512242EC10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002512242EE50>]}
+
+
+============================== 13:49:59.563828 | ba92eee7-93e8-435e-a859-3257e631c538 ==============================
+[0m13:49:59.563828 [info ] [MainThread]: Running with dbt=1.8.7
+[0m13:49:59.565754 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\DH661UW\\.dbt', 'version_check': 'True', 'warn_error': 'None', 'log_path': 'logs', 'fail_fast': 'False', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'invocation_command': 'dbt run', 'send_anonymous_usage_stats': 'True'}
+[0m13:49:59.566740 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\DH661UW\OneDrive - EY\Desktop\Estudo\DBT\covid\dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m13:49:59.568739 [debug] [MainThread]: Command `dbt run` failed at 13:49:59.568739 after 0.19 seconds
+[0m13:49:59.568739 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002511F972400>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002512242ECA0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002512242EBE0>]}
+[0m13:49:59.569739 [debug] [MainThread]: Flushing usage events
+[0m13:50:00.244301 [debug] [MainThread]: Error sending anonymous usage statistics. Disabling tracking for this execution. If you wish to permanently disable tracking, see: https://docs.getdbt.com/reference/global-configs#send-anonymous-usage-stats.
