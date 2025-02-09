@@ -1,0 +1,41 @@
+name: CI
+
+on: workflow_dispatch
+#   pull_request:
+#     branches:
+#       - main
+
+jobs:
+  CI_job:
+    runs-on: ubuntu-latest
+
+    env:
+
+        DBT_ENV_SECRET_ACCOUNT_ID: ${{ secrets.DBT_ENV_SECRET_ACCOUNT_ID }}
+        DBT_ENV_SECRET_USER_PASSWORD: ${{ secrets.DBT_ENV_SECRET_USER_PASSWORD }}
+        DBT_ENV_SECRET_USER_NAME: ${{ secrets.DBT_ENV_SECRET_USER_NAME }}
+        DBT_ENV_SECRET_DATABASE_NAME: ${{ secrets.DBT_ENV_SECRET_DATABASE_NAME }}
+
+    steps:
+    - name: Checkout repository 
+      uses: actions/checkout@v3
+
+    - name: Set-up python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Get schema_id
+      id: schema_id
+      run: echo "SCHEMA_ID=${{ github.event.pull_request.number }}_${{ github.sha }}" >> $GITHUB_ENV
+
+    - name: Run dbt debug
+      run: |
+        dbt debug --target pr --vars "schema_id: $SCHEMA_ID"
+
+    - name: Run dbt build
+      run: |
+        dbt build
