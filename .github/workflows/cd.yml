@@ -1,0 +1,61 @@
+name: CD
+
+on: workflow_dispatch
+#   pull_request:
+#     branches:
+#       - main
+
+jobs:
+  CI_job:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: covid  # Define o diretório de trabalho para todo o job
+
+    env:
+
+        DBT_ENV_SECRET_ACCOUNT_ID: ${{ secrets.DBT_ENV_SECRET_ACCOUNT_ID }}
+        DBT_ENV_SECRET_USER_PASSWORD: ${{ secrets.DBT_ENV_SECRET_USER_PASSWORD }}
+        DBT_ENV_SECRET_USER_NAME: ${{ secrets.DBT_ENV_SECRET_USER_NAME }}
+        DBT_ENV_SECRET_DATABASE_NAME: ${{ secrets.DBT_ENV_SECRET_DATABASE_NAME }}
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        GCP_PRJ_ID: ${{ secrets.GCP_PRJ_ID }}
+        GCS_BUCKET_NAME: ${{ secrets.GCP_BUCKET_NAME }}
+
+
+    steps:
+    - name: Checkout repository 
+      uses: actions/checkout@v3
+
+    - name: Set-up python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ env.GCP_SA_KEY }}
+        project_id: ${{ env.GCP_PRJ_ID }}
+
+    - name: Get manifest file from gcs
+      run: gsutil cp -r gs://${{ env.GCS_BUCKET_NAME }}/manifest.json ./ || echo "manifest.json not found"
+
+    - name: Run dbt debug
+      run: dbt debug --target prd
+
+    - name: Run dbt build
+      run: |
+        if [-f. "./manifest.json"]; then
+          dbt build -s 'state:modified+' --state ./ --target prd
+        else
+          dbt build --target prd
+        fi
+
+    - name: Upload manifest file to gcs
+      run: |
+        gsutil cp ./target/manifest.json gs://${{ env.GCS_BUCKET_NAME }}/
