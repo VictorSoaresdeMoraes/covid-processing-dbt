@@ -9,6 +9,10 @@ jobs:
   CI_job:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: covid  # Define o diretório de trabalho para todo o job
+
     env:
 
         DBT_ENV_SECRET_ACCOUNT_ID: ${{ secrets.DBT_ENV_SECRET_ACCOUNT_ID }}
