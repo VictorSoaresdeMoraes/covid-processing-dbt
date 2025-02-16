@@ -29,6 +29,12 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PRJ_ID }}
+
     - name: Install dependencies
       run: pip install -r requirements.txt
 
