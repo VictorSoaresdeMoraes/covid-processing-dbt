@@ -26,7 +26,7 @@ jobs:
         python-version: '3.9'
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: pip install -r covid/requirements.txt
 
     - name: Get schema_id
       id: schema_id
