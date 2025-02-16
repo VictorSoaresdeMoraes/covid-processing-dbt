@@ -32,9 +32,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Set DBT_PROFILES_DIR
-      run: echo "DBT_PROFILES_DIR=$(pwd)/covid" >> $GITHUB_ENV
-
     - name: Get schema_id
       id: schema_id
       run: echo "SCHEMA_ID=${{ github.event.pull_request.number }}_${{ github.sha }}" >> $GITHUB_ENV
