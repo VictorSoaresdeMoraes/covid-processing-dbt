@@ -21,7 +21,7 @@ jobs:
         DBT_ENV_SECRET_DATABASE_NAME: ${{ secrets.DBT_ENV_SECRET_DATABASE_NAME }}
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         GCP_PRJ_ID: ${{ secrets.GCP_PRJ_ID }}
-        GCS_BUCKET_NAME: ${{ secrets.GCP_BUCKET_NAME }}
+        GCS_BUCKET_NAME: ${{ secrets.GCS_BUCKET_NAME }}
 
 
     steps:
@@ -54,14 +54,6 @@ jobs:
           dbt build -s 'state:modified+' --state ./ --target prd
         else
           dbt build --target prd
-        fi
-
-    - name: Check GCS_BUCKET_NAME
-      run: |
-        if [ -z "${{ env.GCS_BUCKET_NAME }}" ]; then
-        echo "GCS_BUCKET_NAME is not set!"
-        else
-        echo "GCS_BUCKET_NAME is set to: ${{ env.GCS_BUCKET_NAME }}"
         fi
 
     - name: Upload manifest file to gcs
