@@ -6,7 +6,7 @@ on: workflow_dispatch
 #       - main
 
 jobs:
-  CI_job:
+  CD_job:
     runs-on: ubuntu-latest
 
     defaults:
@@ -54,6 +54,14 @@ jobs:
           dbt build -s 'state:modified+' --state ./ --target prd
         else
           dbt build --target prd
+        fi
+
+    - name: Check GCS_BUCKET_NAME
+      run: |
+        if [ -z "${{ env.GCS_BUCKET_NAME }}" ]; then
+        echo "GCS_BUCKET_NAME is not set!"
+        else
+        echo "GCS_BUCKET_NAME is set to: ${{ env.GCS_BUCKET_NAME }}"
         fi
 
     - name: Upload manifest file to gcs
