@@ -91,7 +91,9 @@ SELECT
     INITCAP(t.$1:vacina_grupoAtendimento_nome)::varchar(100) AS patient_care_group,
     INITCAP(t.$1:vacina_categoria_nome)::varchar(100) AS vaccine_category_name,
 
-    t.$1:sistema_origem::varchar(100) AS source_system
+    t.$1:sistema_origem::varchar(100) AS source_system,
+    
+    GETDATE() AS update_date
 FROM @raw.gcs_covid/immunization/full/immunization
 (FILE_FORMAT => raw.parquet_format) t
 WHERE t.$1:status = 'final'
