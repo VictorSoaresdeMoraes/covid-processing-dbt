@@ -17,7 +17,8 @@ symptoms AS (
 SELECT
     --ROW_NUMBER() OVER (ORDER BY SK_NOTIFICATION) AS fato_covid_sintoma_id,  -- Chave primária sequencial
     t1.SK_NOTIFICATION,  -- Ligação com a fato de notificações
-    t2.SK_SYMPTOM
+    t2.SK_SYMPTOM,
+    GETDATE() AS UPDATE_DATE
 FROM symptoms_exploded t1
 INNER JOIN symptoms t2
 ON t1.symptom = t2.symptom

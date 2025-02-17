@@ -27,7 +27,8 @@ SELECT
         WHEN T1.TEST_RESULT IN ('Não Reagente', 'Não Detectável') THEN 0
         WHEN T1.TEST_RESULT IN ('Reagente', 'Detectável') THEN 1
     END AS PATIENT_COVID_POSITIVE,
-    t1.SYMPTOMS
+    t1.SYMPTOMS,
+    GETDATE() AS UPDATE_DATE
 FROM notifications AS t1
 INNER JOIN locations AS t2
 ON t1.NOTIFICATION_IBGE_CITY_CODE = t2.IBGE_CITY_CODE

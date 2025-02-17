@@ -66,7 +66,7 @@ SELECT
         AS location_test_code,
 
     PARSE_JSON(t.$1:testes) AS testes
-    
+         
 FROM @raw.gcs_covid/notifications/full/notifications
 (FILE_FORMAT => raw.parquet_format) t
 )
@@ -103,7 +103,9 @@ SELECT
     INITCAP(value:fabricanteTeste)::STRING AS test_manufacter,
     value:loteTeste::STRING AS test_batch_code,
     value:resultadoTeste::STRING AS test_result,
-    INITCAP(value:tipoTeste)::STRING AS test_type
+    INITCAP(value:tipoTeste)::STRING AS test_type,
+
+    GETDATE() AS update_date
     
 FROM staged_data,
 LATERAL FLATTEN(input => testes)
