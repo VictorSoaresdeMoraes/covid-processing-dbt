@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized='incremental'
+    )
+}}
+
 WITH notifications AS (
     SELECT * FROM {{ ref('stg_notifications') }}
 )
@@ -9,3 +15,10 @@ SELECT DISTINCT
     NOTIFICATION_IBGE_STATE_CODE AS IBGE_STATE_CODE,
     NOTIFICATION_STATE_NAME AS STATE_NAME,
     GETDATE() AS UPDATE_DATE
+FROM notifications
+
+{% if is_incremental() %}
+
+WHERE NOTIFICATION_IBGE_CITY_CODE IS NOT IN (SELECT IBGE_CITY_CODE FROM {{ this }})
+
+{% endif %}

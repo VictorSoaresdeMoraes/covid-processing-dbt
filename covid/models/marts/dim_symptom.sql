@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized='incremental'
+    )
+}}
+
 WITH notifications AS (
     SELECT * FROM {{ ref('stg_notifications') }}
 )
@@ -11,3 +17,9 @@ FROM (
     FROM notifications
 ) T,
 LATERAL FLATTEN(INPUT => SYMPTOMS_ARRAY) AS value
+
+{% if is_incremental() %}
+
+WHERE TRIM(REPLACE(value, '"', '')) IS NOT IN (SELECT SYMPTOM FROM {{ this }})
+ 
+{% endif %}

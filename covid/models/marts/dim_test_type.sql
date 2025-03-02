@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized='incremental'
+    )
+}}
+
 WITH notifications AS (
     SELECT * FROM {{ ref('stg_notifications') }}
 )
@@ -9,3 +15,9 @@ SELECT DISTINCT
     GETDATE() AS UPDATE_DATE
 FROM notifications
 WHERE TEST_TYPE IS NOT NULL
+
+{% if is_incremental() %}
+
+AND TEST_TYPE IS NOT IN (SELECT TEST_TYPE FROM {{ this }})
+ 
+{% endif %}
