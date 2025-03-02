@@ -18,6 +18,6 @@ WHERE TEST_TYPE IS NOT NULL
 
 {% if is_incremental() %}
 
-AND TEST_TYPE IS NOT IN (SELECT TEST_TYPE FROM {{ this }})
+AND TEST_TYPE NOT IN (SELECT TEST_TYPE FROM {{ this }})
  
 {% endif %}
