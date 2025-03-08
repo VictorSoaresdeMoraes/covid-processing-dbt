@@ -19,6 +19,6 @@ FROM notifications
 
 {% if is_incremental() %}
 
-WHERE NOTIFICATION_IBGE_CITY_CODE IS NOT IN (SELECT IBGE_CITY_CODE FROM {{ this }})
+WHERE NOTIFICATION_IBGE_CITY_CODE NOT IN (SELECT IBGE_CITY_CODE FROM {{ this }})
 
 {% endif %}
