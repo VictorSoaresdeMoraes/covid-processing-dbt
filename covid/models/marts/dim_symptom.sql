@@ -20,6 +20,6 @@ LATERAL FLATTEN(INPUT => SYMPTOMS_ARRAY) AS value
 
 {% if is_incremental() %}
 
-WHERE TRIM(REPLACE(value, '"', '')) IS NOT IN (SELECT SYMPTOM FROM {{ this }})
+WHERE TRIM(REPLACE(value, '"', '')) NOT IN (SELECT SYMPTOM FROM {{ this }})
  
 {% endif %}
